@@ -23,6 +23,8 @@
     "@types/react": "~18.0.24",
     "@types/react-native": "~0.70.6",
     "@babel/core": "^7.12.9",
+    "@shopify/eslint-plugin": "^42.0.2",
+    "eslint": "^8.30.0",
     "i18next-parser": "^7.1.0"
   },
   "private": true
