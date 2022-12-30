@@ -7,7 +7,22 @@
     "android": "expo run:android",
     "ios": "expo run:ios",
     "web": "expo start --web",
-    "extract": "i18next"
+    "extract": "i18next",
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "jest": {
+    "preset": "jest-expo",
+    "transformIgnorePatterns": [
+      "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg)"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx"
+    ],
+    "setupFilesAfterEnv": ["@testing-library/jest-native/extend-expect"]
   },
   "dependencies": {
     "expo": "~47.0.9",
@@ -22,10 +37,17 @@
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@shopify/eslint-plugin": "^42.0.2",
+    "@testing-library/jest-native": "^5.4.0",
+    "@testing-library/react-native": "^11.5.0",
+    "@types/jest": "^29.2.4",
     "@types/react": "~18.0.24",
     "@types/react-native": "~0.70.6",
+    "@types/react-test-renderer": "^18.0.0",
     "eslint": "^8.30.0",
     "i18next-parser": "^7.1.0",
+    "jest": "^26.6.3",
+    "jest-expo": "^47.0.1",
+    "react-test-renderer": "^18.2.0",
     "typescript": "^4.6.3"
   },
   "private": true
