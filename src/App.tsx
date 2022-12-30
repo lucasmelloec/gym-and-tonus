@@ -1,11 +1,15 @@
 import React, { useMemo } from 'react';
 import { getLocales } from 'expo-localization';
-import { StyleSheet, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import I18Next from './infra/services/i18n/I18next';
 import { I18nContextProvider } from './infra/services/i18n/I18n';
+import HomeScreen from './ui/screens/HomeScreen';
 
 const language = getLocales()[0]?.languageCode || 'en';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   const i18n = useMemo(() => new I18Next(language), []);
@@ -15,16 +19,11 @@ export default function App() {
         t: i18n.translate.bind(i18n),
       }}
     >
-      <View style={styles.container} />
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Home">
+          <Stack.Screen name="Home" component={HomeScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
     </I18nContextProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#25292e',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
