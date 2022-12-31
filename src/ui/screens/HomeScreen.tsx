@@ -1,22 +1,23 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { Button, StyleSheet, View } from 'react-native';
 
-import { useI18n } from '../../infra/services/i18n/I18n';
+import { HomeScreenNavigationProps } from '../routes/routes.d';
 
-export default function HomeScreen() {
-  const { t } = useI18n();
+export default function HomeScreen({ navigation }: HomeScreenNavigationProps) {
   return (
     <View style={styles.container}>
-      <Text style={{ color: '#fff' }}>{t('welcome', 'welcome to home')}</Text>
-    </View>
+      <Button
+        title="Workout Screen" onPress={() => {
+          navigation.navigate('Workout');
+        }}
+      />
+    </View >
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#25292e',
-    alignItems: 'center',
     justifyContent: 'center',
   },
 });

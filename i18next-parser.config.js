@@ -4,5 +4,5 @@ module.exports = {
   indentation: 2,
   locales: ['en', 'pt'],
   output: 'locales/$LOCALE.json',
-  input: ['src/ui/**/*.{ts, tsx}'],
+  input: ['src/ui/**/*.{ts,tsx}'],
 }

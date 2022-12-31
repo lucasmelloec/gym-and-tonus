@@ -8,7 +8,9 @@
     "object-curly-spacing": "off",
     "@babel/object-curly-spacing": ["error", "always"],
     "@typescript-eslint/object-curly-spacing": ["error", "always"],
-    "@babel/semi": "off"
+    "@babel/semi": "off",
+    "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/consistent-type-definitions": "off"
   },
   "parserOptions": {
     "project": "tsconfig.json"
