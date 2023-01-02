@@ -1,3 +1,4 @@
+import 'expo-dev-client';
 import React, { useMemo } from 'react';
 import { getLocales } from 'expo-localization';
 
