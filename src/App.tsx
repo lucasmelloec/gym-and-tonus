@@ -1,4 +1,3 @@
-import 'expo-dev-client';
 import React, { useMemo } from 'react';
 import { getLocales } from 'expo-localization';
 
@@ -8,8 +7,10 @@ import Routes from './ui/routes';
 
 const language = getLocales()[0]?.languageCode || 'en';
 
+
 export default function App() {
   const i18n = useMemo(() => new I18Next(language), []);
+
   return (
     <I18nContextProvider
       value={{
