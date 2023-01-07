@@ -10,7 +10,8 @@
     "@typescript-eslint/object-curly-spacing": ["error", "always"],
     "@babel/semi": "off",
     "@typescript-eslint/no-explicit-any": "error",
-    "@typescript-eslint/consistent-type-definitions": "off"
+    "@typescript-eslint/consistent-type-definitions": "off",
+    "promise/param-names": ["error", { "resolvePattern": "^_?resolve", "rejectPattern": "^_?reject" }]
   },
   "parserOptions": {
     "project": "tsconfig.json"

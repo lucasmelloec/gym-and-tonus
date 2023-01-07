@@ -1,6 +1,6 @@
 import * as SQLite from 'expo-sqlite';
 
-import Database from './Database';
+import Database, { QueryStatement } from './Database';
 
 export default class SqliteDatabase extends Database {
   private readonly db;
@@ -10,19 +10,29 @@ export default class SqliteDatabase extends Database {
     this.db = SQLite.openDatabase('GymAndTonus.db');
   }
 
-  query(statement: string, params: (string | number | null)[]): Promise<unknown> {
-    return new Promise((resolve, reject) => {
+  queryBulk(queryStatements: QueryStatement[]): Promise<unknown[]> {
+    return new Promise((resolveTx, rejectTx) => {
       this.db.transaction((tx) => {
-        tx.executeSql(statement, params, (_, { rows }) => {
-          resolve(rows._array);
-        }, (_, sqlError) => {
-          reject(sqlError);
-          return true;
-        });
-      }, (txError) => {
-        reject(txError);
+        Promise.all(queryStatements.map((query) => {
+          return new Promise((resolveSql, rejectSql) => {
+            tx.executeSql(query.statement, query.params,
+              (_tx, { rows }) => resolveSql(rows._array),
+              (_tx, error) => {
+                rejectSql(error);
+                return true;
+              });
+          });
+        })).then(resolveTx).catch(rejectTx);
       });
     });
+  }
+
+  async query({ statement, params }: QueryStatement): Promise<unknown> {
+    return this.queryBulk([{ statement, params }])
+      .then((rows) => rows[0])
+      .catch((error) => {
+        throw error;
+      });
   }
 
   close(): void {
