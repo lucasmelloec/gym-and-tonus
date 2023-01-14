@@ -39,6 +39,10 @@ export default abstract class Database {
           params: [++currentVersion],
         });
       } catch (_error) {
+        await this.query({
+          statement: 'DELETE FROM versions WHERE version=?;',
+          params: [currentVersion--],
+        });
         await down(this.queryBulk.bind(this));
       }
     }
